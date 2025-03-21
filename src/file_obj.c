@@ -7,18 +7,17 @@ void read_obj(char *filename, vertices *vs, faces *fs) {
   char buf[1024];
   while (fgets(buf, sizeof(buf), file)) {
     if (buf[0] == 'v' && buf[1] == ' ') {
-      vec3 v;
-      sscanf(buf, "v %f %f %f\n", &v.x, &v.y, &v.z);
+      vec3 *v = new_vec3(0, 0, 0);
+      sscanf(buf, "v %f %f %f\n", &v->x, &v->y, &v->z);
       add_vertex(vs, v);
     } else if (buf[0] == 'f' && buf[1] == ' ') {
-      face *f = (face *)malloc(sizeof(face));
-      *f = (face){NULL, 0};
+      face *f = new_face();
       int v_begin = 0;
       int fi = 0;
       for (int i = 1; buf[i] != '\0' && i < 1024; ++i) {
         if (buf[i] == ' ') {
           if (v_begin) {
-            add_face(f, fi);
+            add_to_face(f, fi);
             fi = 0;
           } else {
             v_begin = 1;
@@ -27,12 +26,12 @@ void read_obj(char *filename, vertices *vs, faces *fs) {
           fi *= 10;
           fi += buf[i] - '0';
         } else if (v_begin) {
-          add_face(f, fi);
+          add_to_face(f, fi);
           fi = 0;
           v_begin = 0;
         }
       }
-      add_faces(fs, f);
+      add_face(fs, f);
     }
   }
 

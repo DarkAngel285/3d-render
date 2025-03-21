@@ -11,6 +11,7 @@
 typedef struct {
   size_t rows, cols;
   char **data;
+  int **depth;
 } buffer;
 
 buffer *new_buffer(size_t rows, size_t cols);

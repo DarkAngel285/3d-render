@@ -1,18 +1,26 @@
 # 3d-render
 Terminal ascii 3d rendering
 
-## Keys
+# Keys
 
-# Movement
+## Movement
 w - forward
+
 a - left
+
 s - backward
+
 d - right
+
 r - up
+
 f - down
 
-# Camera rotation
+## Camera rotation
 h - left
+
 j - down
+
 k - up
+
 l - right
